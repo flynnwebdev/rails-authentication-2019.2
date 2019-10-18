@@ -27,6 +27,7 @@ class TweetsController < ApplicationController
   # POST /tweets.json
   def create
     @tweet = Tweet.new(tweet_params)
+    @tweet.image.attach(tweet_params[:image])
     @tweet.user = current_user
 
     respond_to do |format|
@@ -45,6 +46,7 @@ class TweetsController < ApplicationController
   def update
     respond_to do |format|
       if @tweet.update(tweet_params)
+        @tweet.image.attach(tweet_params[:image]) if tweet_params[:image]
         format.html { redirect_to @tweet, notice: "Tweet was successfully updated." }
         format.json { render :show, status: :ok, location: @tweet }
       else
@@ -80,6 +82,6 @@ class TweetsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def tweet_params
-    params.require(:tweet).permit(:title, :content)
+    params.require(:tweet).permit(:title, :content, :image)
   end
 end

@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Image</th>
       <th>Title</th>
       <th>Content</th>
       <th>User</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @tweets.each do |tweet| %>
       <tr>
+        <td><%= tweet.image.attached? ? image_tag(tweet.image, height: 40) : '' %></td>
         <td><%= tweet.title %></td>
         <td><%= tweet.content %></td>
         <td><%= tweet.user.email %></td>
