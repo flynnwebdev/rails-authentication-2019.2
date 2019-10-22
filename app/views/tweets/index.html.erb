@@ -1,8 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tweets</h1>
 
-<table>
+      <h1 class="title">
+        Tweets
+      </h1>
+
+<table class="table container">
   <thead>
     <tr>
       <th>Image</th>
@@ -16,20 +19,21 @@
   <tbody>
     <% @tweets.each do |tweet| %>
       <tr>
-        <td><%= tweet.image.attached? ? image_tag(tweet.image, height: 40) : '' %></td>
+        <td>
+          <figure class="image is-square">
+            <%= tweet.image.attached? ? image_tag(tweet.image, class: 'is-rounded') : '' %>
+          </figure>
+        </td>
         <td><%= tweet.title %></td>
         <td><%= tweet.content %></td>
         <td><%= tweet.user.email %></td>
-        <td><%= link_to 'Show', tweet %></td>
+        <td><%= link_to 'Show', tweet, class: 'button is-small is-primary is-outlined is-rounded' %></td>
         <% if tweet.can_edit?(current_user) %>
-          <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-          <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_tweet_path(tweet), class: 'button is-small is-rounded is-outlined is-warning' %></td>
+          <td><%= link_to 'Destroy', tweet, method: :delete, class: 'button is-small is-rounded is-danger', data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Tweet', new_tweet_path %>

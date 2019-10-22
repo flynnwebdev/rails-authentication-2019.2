@@ -4,17 +4,34 @@
     <title>Twitter</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <% if user_signed_in? %>
-      <p>Welcome, <%= current_user.email %>! | <%= link_to 'Logout', destroy_user_session_path, method: 'delete' %></p>
-    <% end %>
-    <%= yield %>
+    <nav class="level section has-background-primary">
+        <% if user_signed_in? %>
+        <p class="level-item is-size-5">
+          Welcome, <%= current_user.email %>!
+        </p>
+        <% end %>
+      <p class="level-item has-text-centered is-size-1">
+        TWITTER
+      </p>
+      <p class="level-item has-text-centered">
+        <% if user_signed_in? %>
+        <p class="is-size-5">
+          <%= link_to 'New Tweet', new_tweet_path, class: 'button is-info' %>
+          <%= link_to 'Logout', destroy_user_session_path, method: 'delete', class: 'button is-warning' %>
+        </p>
+        <% end %>
+      </p>
+    </nav>
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
   </body>
 </html>

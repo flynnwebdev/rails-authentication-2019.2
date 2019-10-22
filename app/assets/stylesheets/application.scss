@@ -13,4 +13,7 @@
  *= require_tree .
  *= require_self
  */
-// @import 'bulma/bulma'
+
+$section-padding: 2rem 1.5rem;
+
+@import 'bulma/bulma'
